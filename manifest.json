@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"manifest_version": 2,
 	"description": "Campground is a simple client for tent.io servers.",
+	"options_page": "options/options.html",
 	"minimum_chrome_version": "21.0.0.0",
 
 	"permissions": [
