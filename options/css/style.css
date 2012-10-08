@@ -1,3 +1,11 @@
-* {
-	-webkit-user-select: none
+.span8 > h1:before {
+	content: '__MSG_options_title__';
+}
+
+label#server:before {
+	content: '__MSG_options_server_label__';
+}
+
+button[type="submit"].btn:before {
+	content: '__MSG_options_save__';
 }

@@ -1,0 +1,22 @@
+{
+	"extension_name": {
+		"message": "Campground",
+		"description": "Name of the extension."
+	},
+	"extension_description": {
+		"message": "Campground is a simple client for tent.io servers.",
+		"description": "Description of the extension."
+	},
+	"options_title": {
+		"message": "Campground Options",
+		"description": "Title for the options page."
+	},
+	"options_server_label": {
+		"message": "Server",
+		"description": "Text for server input on options page."
+	},
+	"options_save": {
+		"message": "Save",
+		"description": "Text for the save button."
+	}
+}
