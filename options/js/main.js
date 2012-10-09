@@ -1,6 +1,12 @@
 $(document).ready(function() {
 	document.title = chrome.i18n.getMessage('options_title');
 
+	chrome.storage.sync.get(['server'], function(data) {
+		if (data.server) {
+			$("#inputServer").val(data.server);
+		}
+	});
+
 	$("form").submit(function(event) {
 		event.preventDefault();
 		event.stopPropagation();
