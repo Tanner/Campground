@@ -18,5 +18,9 @@
 	"options_save": {
 		"message": "Save",
 		"description": "Text for the save button."
+	},
+	"options_saving_suffix": {
+		"message": "...",
+		"description": "Suffix for save button when saving."
 	}
 }
