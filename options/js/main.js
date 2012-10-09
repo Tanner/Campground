@@ -10,13 +10,18 @@ $(document).ready(function() {
 		// Strip 'http' or 'https'
 		if (server.indexOf('http://') != -1) {
 			server = server.substring(7);
-
-			$("#inputServer").val(server);
-		} else if (server.indexOf('https://' != -1)) {
+		} else if (server.indexOf('https://') != -1) {
 			server = server.substring(8);
-
-			$("#inputServer").val(server);
 		}
+
+		// Strip a path
+		var path = server.indexOf('/');
+
+		if (path != -1) {
+			server = server.substring(0, path);
+		}
+
+		$("#inputServer").val(server);
 
 		// Save to chrome.storage
 		$("#save").text(chrome.i18n.getMessage('options_saving_suffix'));
