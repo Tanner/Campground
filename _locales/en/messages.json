@@ -22,5 +22,9 @@
 	"options_saving_suffix": {
 		"message": "...",
 		"description": "Suffix for save button when saving."
+	},
+	"browser_action_default_title": {
+		"message": "Campground",
+		"description": "Default title for the browser action."
 	}
 }
