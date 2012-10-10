@@ -45,6 +45,8 @@ function tentGetAPIRoots(server) {
 		http.send(null);
 
 		if (http.status == 404) {
+			console.error('Unable to request link.');
+
 			continue;
 		}
 
@@ -52,6 +54,8 @@ function tentGetAPIRoots(server) {
 		var response = JSON.parse(http.response);
 
 		if (response == null) {
+			console.error('Unable to request link.');
+
 			continue;
 		}
 
