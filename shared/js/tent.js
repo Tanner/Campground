@@ -1,5 +1,42 @@
-function tentGetPosts(server) {
+function tentGetLatestPosts(server, limit) {
+	var api_roots = tentGetAPIRoots(server);
 
+	if (limit == null) {
+		limit = 10;
+	}
+
+	if (api_roots == null) {
+		console.error('No API roots found!');
+
+		return null;
+	}
+
+	for (var i = 0; i < api_roots.length; i++) {
+		var url = api_roots[i] + '/posts';
+
+		http = new XMLHttpRequest();
+		http.open('GET', url, false);
+		http.send('limit=' + limit + '&post_types=https://tent.io/types/post/status/v0.1.0');
+
+		if (http.readyState == 4) {
+			if (http.status == 200) {
+				// We've received the response
+				var response = JSON.parse(http.responseText);
+
+				if (response == null) {
+					console.error('Unable to parse response.');
+
+					return null;
+				}
+
+				return response;
+			} else {
+				console.error('Server returned status ' + http.status);
+
+				return null;
+			}
+		}
+	}
 }
 
 function tentGetAPIRoots(server) {
