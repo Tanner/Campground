@@ -46,57 +46,65 @@ function tentGetAPIRoots(server) {
 	http.setRequestHeader('Content-Type', 'application/vnd.tent.v0+json');
 	http.send(null);
 
-	var headers = http.getAllResponseHeaders();
+	if (http.readyState == 4) {
+		if (http.status == 200) {
+			var headers = http.getAllResponseHeaders();
 
-	headers = extractHeaders(headers);
+			headers = extractHeaders(headers);
 
-	links = headers['Link'];
+			links = headers['Link'];
 
-	if (links == null || links == '') {
-		console.error('Unable to get links from server.');
+			if (links == null || links == '') {
+				console.error('Unable to get links from server.');
 
-		return null;
-	}
+				return null;
+			}
 
-	var link_split = links.split(',\s*');
+			var link_split = links.split(',\s*');
 
-	for (var i = 0; i < link_split.length; i++) {
-		var link = link_split[i];
+			for (var i = 0; i < link_split.length; i++) {
+				var link = link_split[i];
 
-		var info = link.match(/<([^>]+)>; rel="(https?:\/\/[^\"]+)"\s*$/);
+				var info = link.match(/<([^>]+)>; rel="(https?:\/\/[^\"]+)"\s*$/);
 
-		if (info == null || info.length == 0) {
-			continue;
+				if (info == null || info.length == 0) {
+					continue;
+				}
+
+				var href = info[1];
+				var rel = info[2];
+
+				if (rel != 'https://tent.io/rels/profile') {
+					continue;
+				}
+
+				// Request from the link href
+				http = new XMLHttpRequest();
+				http.open('GET', href, false);
+				http.send(null);
+
+				if (http.status == 404) {
+					console.error('Unable to request link.');
+
+					continue;
+				}
+
+				// If the response is JSON, then we've got the servers list
+				var response = JSON.parse(http.response);
+
+				if (response == null) {
+					console.error('Unable to request link.');
+
+					continue;
+				}
+
+				return response['https://tent.io/types/info/core/v0.1.0']['servers'];
+			}
+		} else {
+			console.error('Server returned status ' + http.status);
+
+			return null;
 		}
-
-		var href = info[1];
-		var rel = info[2];
-
-		if (rel != 'https://tent.io/rels/profile') {
-			continue;
-		}
-
-		// Request from the link href
-		http = new XMLHttpRequest();
-		http.open('GET', href, false);
-		http.send(null);
-
-		if (http.status == 404) {
-			console.error('Unable to request link.');
-
-			continue;
-		}
-
-		// If the response is JSON, then we've got the servers list
-		var response = JSON.parse(http.response);
-
-		if (response == null) {
-			console.error('Unable to request link.');
-
-			continue;
-		}
-
-		return response['https://tent.io/types/info/core/v0.1.0']['servers'];
 	}
 
 	return null;
