@@ -14,9 +14,11 @@ function tentGetLatestPosts(server, limit) {
 	for (var i = 0; i < api_roots.length; i++) {
 		var url = api_roots[i] + '/posts';
 
+		url += '?limit=' + limit + '&post_types=https://tent.io/types/post/status/v0.1.0';
+
 		http = new XMLHttpRequest();
 		http.open('GET', url, false);
-		http.send('limit=' + limit + '&post_types=https://tent.io/types/post/status/v0.1.0');
+		http.send(null);
 
 		if (http.readyState == 4) {
 			if (http.status == 200) {
