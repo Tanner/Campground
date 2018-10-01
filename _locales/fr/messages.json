@@ -1,0 +1,26 @@
+{
+	"extension_name": {
+		"message": "Campground",
+		"description": "Nom de l'extension."
+	},
+	"options_title": {
+		"message": "Campground Options",
+		"description": "Titre sur la page d'options."
+	},
+	"options_server_label": {
+		"message": "Serveur",
+		"description": "Texte pour l'input serveur sur la page d'options."
+	},
+	"options_save": {
+		"message": "Sauvegarder",
+		"description": "Texte pour le boutton de sauvegarde."
+	},
+	"options_saving_suffix": {
+		"message": "...",
+		"description": "Suffixe pour le boutton de sauvegarde en action."
+	},
+	"browser_action_default_title": {
+		"message": "Campground",
+		"description": "Titre par défaut pour l'action du nagivateur."
+	}
+}
